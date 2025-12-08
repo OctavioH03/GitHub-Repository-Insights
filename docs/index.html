@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Repo Insight Cards</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>GitHub Repo Insight Cards</h1>
+      <p class="subtitle">Quickly understand any repository or find one that matches your needs.</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <div class="input-group">
+          <div class="mode-toggle">
+            <label><input type="radio" name="mode" value="url" checked> Analyze Repo URL</label>
+            <label><input type="radio" name="mode" value="search"> Search by Description</label>
+          </div>
+
+          <label for="inputValue" id="inputLabel">GitHub Repo URL</label>
+          <input
+            type="text"
+            id="inputValue"
+            placeholder="e.g., https://github.com/pallets/flask"
+            autocomplete="off"
+          >
+
+          <button id="submitButton">Generate Insights</button>
+          <div id="status" class="status-message" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="repoInfo" class="card hidden">
+        <h2>Repository Info</h2>
+        <div id="repoMeta"></div>
+        <div id="repoLanguages" class="pill-row"></div>
+        <div id="repoTopics" class="pill-row"></div>
+      </section>
+
+      <section id="readmeSection" class="card hidden">
+        <h2>README Snippet</h2>
+        <pre id="readmeContent" class="code-block"></pre>
+      </section>
+
+      <section id="insightsSection" class="card hidden">
+        <h2>Insight Cards</h2>
+        <div id="insightsContent" class="insights"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Powered by GitHub REST API & OpenAI</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
