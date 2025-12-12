@@ -11,7 +11,7 @@
   <div class="container">
     <header>
       <h1>GitHub Repo Insight Cards</h1>
-      <p class="subtitle">Quickly understand any repository or find one that matches your needs.</p>
+      <p class="subtitle">Quickly understand anys repository or find one that matches your needs.</p>
     </header>
 
     <main>
@@ -44,12 +44,14 @@
 
       <section id="readmeSection" class="card hidden">
         <h2>README Snippet</h2>
-        <pre id="readmeContent" class="code-block"></pre>
+        <div id="readmeContent" class="markdown-content"></div>
       </section>
 
       <section id="insightsSection" class="card hidden">
         <h2>Insight Cards</h2>
-        <div id="insightsContent" class="insights"></div>
+        <div class="insights-container">
+          <div id="insightsContent" class="insights"></div>
+        </div>
       </section>
     </main>
 

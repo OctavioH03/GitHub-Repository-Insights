@@ -55,7 +55,7 @@ def get_openai_client():
 
 # GitHub helpers
 GITHUB_API_BASE = "https://api.github.com"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")  # optional but recommended for higher rate limits
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")  # optional
 
 
 def gh_headers():
@@ -87,7 +87,7 @@ def fetch_repo(owner: str, repo: str):
     return resp.json(), resp.status_code
 
 
-def fetch_readme(owner: str, repo: str, max_chars: int = 4000):
+def fetch_readme(owner: str, repo: str, max_chars: int = None):
     resp = requests.get(
         f"{GITHUB_API_BASE}/repos/{owner}/{repo}/readme",
         headers=gh_headers(),
@@ -102,10 +102,10 @@ def fetch_readme(owner: str, repo: str, max_chars: int = 4000):
     if encoding == "base64":
         try:
             decoded = base64.b64decode(content).decode("utf-8", errors="ignore")
-            return decoded[:max_chars]
+            return decoded if max_chars is None else decoded[:max_chars]
         except Exception:
             return ""
-    return content[:max_chars] if isinstance(content, str) else ""
+    return content if max_chars is None or not isinstance(content, str) else content[:max_chars]
 
 
 def fetch_languages(owner: str, repo: str):
@@ -182,7 +182,7 @@ Return only a short keyword string suitable for GitHub search (no JSON, no quote
 def generate_insights(repo_json: dict) -> str:
     client = get_openai_client()
     prompt = f"""
-You are an AI that produces 4–5 Insight Cards for software repositories.
+You are an AI that produces 4-5 Insight Cards for software repositories.
 Based ONLY on the data below, produce clear sections with markdown headings.
 
 SECTION 1: What the repository does
@@ -249,12 +249,6 @@ def insights():
     except Exception as e:
         logging.exception("Server error")
         return jsonify({"error": "Server error"}), 500
-
-
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({"status": "ok"}), 200
-
 
 if __name__ == "__main__":
     if not os.getenv("OPENAI_API_KEY"):

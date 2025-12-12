@@ -13,8 +13,9 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1400px;
   margin: 0 auto;
+  width: 95%;
 }
 
 header {
@@ -153,47 +154,452 @@ main {
   border: 1px solid #e0e7ff;
 }
 
-/* README */
-.code-block {
-  background: #0f172a;
-  color: #e2e8f0;
-  padding: 12px;
-  border-radius: 8px;
-  max-height: 360px;
+/* README - Markdown Content */
+.markdown-content {
+  height: 500px;
+  width: 100%;
+  min-height: 300px;
+  min-width: 600px;
+  max-height: 90vh;
+  max-width: 100%;
   overflow: auto;
-  font-family: "JetBrains Mono", Consolas, monospace;
-  white-space: pre-wrap;
+  padding: 20px;
+  background: #fafbfc;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  line-height: 1.6;
+  color: #24292e;
+  resize: both;
 }
 
-/* Insights */
+/* Resize handle styling */
+.markdown-content::-webkit-resizer {
+  background: #e1e4e8;
+  border-radius: 0 0 8px 0;
+  border: 1px solid #d1d5db;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #24292e;
+  line-height: 1.25;
+  display: block;
+}
+
+.markdown-content h1 {
+  font-size: 2em;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-content h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.markdown-content h3 {
+  font-size: 1.25em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.markdown-content p {
+  margin-bottom: 16px;
+  color: #24292e;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-bottom: 16px;
+  padding-left: 2em;
+  color: #24292e;
+}
+
+.markdown-content li {
+  margin-bottom: 0.25em;
+}
+
+.markdown-content code {
+  background: #f6f8fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  color: #24292e;
+}
+
+.markdown-content pre {
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+  margin-bottom: 16px;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: #24292e;
+}
+
+.markdown-content blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+  margin-bottom: 16px;
+}
+
+.markdown-content a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
+
+.markdown-content table {
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.markdown-content table th,
+.markdown-content table td {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+.markdown-content table th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+.markdown-content img {
+  max-width: none;
+  height: auto;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+/* Default: images are inline to allow horizontal layout */
+.markdown-content p img,
+.markdown-content a img {
+  display: inline-block;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+/* README header badges - first paragraph after h1 or at top */
+.markdown-content h1 + p,
+.markdown-content > p:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.markdown-content h1 + p img,
+.markdown-content > p:first-child img {
+  display: inline-block;
+  margin: 0;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* Standalone images (not in paragraphs) display as block */
+.markdown-content > img {
+  display: block;
+  margin: 16px 0;
+  max-width: 100%;
+}
+
+/* Insights - Carousel Layout */
+/* Background gradient bursting from around the cards and fading out to the borders of the container */
+
+.insights-container {
+  position: relative;
+  width: 100%;
+  margin: 24px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(79, 70, 229, 0.08) 0%,
+    rgba(79, 70, 229, 0.05) 25%,
+    rgba(124, 58, 237, 0.03) 50%,
+    rgba(247, 248, 250, 0.5) 75%,
+    rgba(247, 248, 250, 1) 100%
+  );
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.insights-container::before,
+.insights-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.insights-container::before {
+  left: 0;
+  background: linear-gradient(to right, 
+    rgba(247, 248, 250, 1) 0%,
+    rgba(247, 248, 250, 0.7) 40%,
+    rgba(247, 248, 250, 0) 100%
+  );
+  box-shadow: inset 25px 0 40px -15px rgba(79, 70, 229, 0.15);
+}
+
+.insights-container::after {
+  right: 0;
+  background: linear-gradient(to left, 
+    rgba(247, 248, 250, 1) 0%,
+    rgba(247, 248, 250, 0.7) 40%,
+    rgba(247, 248, 250, 0) 100%
+  );
+  box-shadow: inset -25px 0 40px -15px rgba(79, 70, 229, 0.15);
+}
+
 .insights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding: 20px 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: calc(320px * 3 + 20px * 2);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.insights::-webkit-scrollbar {
+  height: 8px;
+}
+
+.insights::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.insights::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.insights::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .insight-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: 12px;
+  padding: 20px;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 320px;
+  width: 320px;
+  height: 450px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.4s ease,
+              box-shadow 0.4s ease,
+              scale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.95);
+  opacity: 0.7;
+  cursor: pointer;
+  position: relative;
+  will-change: transform;
+}
+
+.insight-card.active {
+  transform: scale(1.08);
+  opacity: 1;
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.25);
+  border-color: #4f46e5;
+  border-width: 2px;
+  z-index: 10;
+}
+
+.insight-card:hover:not(.active) {
+  transform: scale(0.98);
+  opacity: 0.85;
 }
 
 .insight-card h3 {
-  margin-bottom: 8px;
-  font-size: 1rem;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.3;
+}
+
+.insight-card > div {
+  flex: 1;
+  color: #24292e;
+  line-height: 1.6;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.insight-card > div::-webkit-scrollbar {
+  width: 6px;
+}
+
+.insight-card > div::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.insight-card > div::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.insight-card > div::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .insight-card p {
-  line-height: 1.5;
-  color: #1f2937;
+  margin-bottom: 12px;
+  color: #24292e;
+  line-height: 1.6;
 }
 
-.insight-card ul {
-  margin-left: 18px;
+.insight-card p:last-child {
+  margin-bottom: 0;
+}
+
+.insight-card ul,
+.insight-card ol {
+  margin-left: 20px;
+  margin-bottom: 12px;
   margin-top: 6px;
-  color: #1f2937;
+  color: #24292e;
+  line-height: 1.6;
+}
+
+.insight-card li {
+  margin-bottom: 6px;
+}
+
+.insight-card code {
+  background: #f6f8fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  color: #24292e;
+}
+
+.insight-card pre {
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 12px;
+  overflow: auto;
+  margin-bottom: 12px;
+  font-size: 0.85em;
+}
+
+.insight-card pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Carousel Navigation */
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.carousel-btn {
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: #4338ca;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+.carousel-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #9ca3af;
+}
+
+.carousel-indicator {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  background: #4f46e5;
+  width: 24px;
+  border-radius: 4px;
 }
 
 /* Footer */
@@ -208,6 +614,18 @@ footer {
   .mode-toggle {
     flex-direction: column;
     gap: 8px;
+  }
+  
+  .insight-card {
+    flex: 0 0 280px;
+    width: 280px;
+    height: 400px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 }
 
